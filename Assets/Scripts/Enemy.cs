@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
     private Transform playerTransform;
     private NavMeshAgent agent;
+    public GameObject explosionObject;
 
     // Start is called before the first frame update
     void Start()
@@ -19,5 +20,10 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         agent.SetDestination(playerTransform.position);
+    }
+
+    void OnDestroy()
+    {
+        Instantiate(explosionObject, transform.position, Quaternion.identity);
     }
 }
