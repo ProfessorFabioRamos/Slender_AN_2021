@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Player : MonoBehaviour
@@ -16,11 +17,13 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private bool canShoot = false;
+    public int lives = 3;
 
     // Start is called before the first frame update
     void Start()
     {
         points = 0;
+        lives = 3;
         gunPlayer = transform.GetChild(0).Find("Gun").gameObject;
         gunPlayer.SetActive(false);
     }
@@ -67,6 +70,16 @@ public class Player : MonoBehaviour
         {
             points++;
             Destroy(other.gameObject);
+        }
+    }
+
+    public void TakeDamage()
+    {
+        lives--;
+        if(lives <= 0)
+        {
+            SceneManager.LoadScene("Game Over");
+            Debug.Log("GAME OVER");
         }
     }
 }

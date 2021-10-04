@@ -7,6 +7,7 @@ public class OutpostDoor : MonoBehaviour
 {
     private Animation anim;
     public Text hintText;
+    public bool isOpen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +26,10 @@ public class OutpostDoor : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             int points = other.GetComponent<Player>().points;
-            if(points >= 8)
+            if(points >= 8 && !isOpen)
             {
                 anim.Play("Opening");
+                isOpen = true;
             }
             else
             {
